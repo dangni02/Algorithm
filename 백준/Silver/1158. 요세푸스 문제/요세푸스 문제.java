@@ -6,11 +6,8 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 //원형 문제이기 때문에 원형 자료구조를 써야겠다 싶었다
-// 기억 나는게 원형 큐밖에 없었기 때문에 일단 원형 큐
-//원형 큐는 선형 큐와 마찬가지로 선입선출(First In First Out) 형태의 데이터 구조입니다. 
-//front와 rear 역시 사용하며 배열로 구현할 수 있습니다. 원형 큐는 선형 큐의 한계점을 해결하기 위해 구조화한 것인데,
-// 배열의 마지막 인덱스에서 다음 인덱스로 넘어갈 때 '(index+1) % 배열의 사이즈'를 이용하여 
-//인덱스 0으로 순환되는 구조 OutOfBoundsException이 일어나지 않고 
+// 기억 나는게 원형 큐밖에 없었기 때문에 원형 큐를 써볼까? 하고 구글링 하는 와중에 큐를 쓰는 게 더 쉽다 하여 큐를 썼다
+
 
 public class Main{
     public static void main(String[] args)throws IOException {
@@ -31,14 +28,15 @@ public class Main{
         }
 
         sb.append("<");
-       while(queue.size() != 1) {
+       while(queue.size() != 1) {// 마지막 stack 요소를 남겨둘 때까지 ( 마지막에는 , 를 찍지 않아야하기 때문에)
             // K - 1번째까지는 처음에 있던 값을 맨 뒤로 보낸다.
             for (int i = 0; i < k - 1; i++) {
-                queue.offer(queue.poll());
+                queue.offer(queue.poll());//poll()후 queue 뒤에 추가
             }
-            // K번째 값은 poll한 후 출력한다.
+            // K번째 값은 poll한 후 sb에 append
             sb.append(queue.poll() + ", ");
         }
+        //마지막 애는 queue.poll( 후 ">" sb에 추가
         sb.append(queue.poll() + ">");
         System.out.println(sb.toString() + " ");
 
